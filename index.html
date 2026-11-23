@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Viderestiller til spørgeskema</title>
+  <meta name="robots" content="noindex,nofollow">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      max-width: 620px;
+      margin: 12vh auto;
+      padding: 0 24px;
+      line-height: 1.5;
+      color: #222;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Du viderestilles til spørgeskemaet</h1>
+  <p>Vent venligst et øjeblik. Hvis du ikke viderestilles automatisk,
+     <a id="manual-link" href="#">klik her</a>.</p>
+
+  <script>
+    const surveyLinks = [
+      "https://survey.au.dk/LinkCollector?key=7XQK3Y7YSKCJ",
+      "https://survey.au.dk/LinkCollector?key=DFY6CCEHL5CP",
+      "https://survey.au.dk/LinkCollector?key=KAQNCUGGLJ3J",
+      "https://survey.au.dk/LinkCollector?key=F9W63V7GJK11",
+      "https://survey.au.dk/LinkCollector?key=RXQ63DGYU691",
+      "https://survey.au.dk/LinkCollector?key=1QWK9H5CU6CP",
+      "https://survey.au.dk/LinkCollector?key=J8W13Z7UJ6C2",
+      "https://survey.au.dk/LinkCollector?key=E8NP3C7YS1CK"
+    ];
+
+    // Assign once per browser. Refreshing the page keeps the same version.
+    const storageKey = "speciale_survey_version_v1";
+    let selectedIndex = Number(localStorage.getItem(storageKey));
+
+    if (!Number.isInteger(selectedIndex) ||
+        selectedIndex < 0 ||
+        selectedIndex >= surveyLinks.length) {
+      selectedIndex = Math.floor(Math.random() * surveyLinks.length);
+      localStorage.setItem(storageKey, String(selectedIndex));
+    }
+
+    const destination = surveyLinks[selectedIndex];
+    document.getElementById("manual-link").href = destination;
+    window.location.replace(destination);
+  </script>
+</body>
+</html>
